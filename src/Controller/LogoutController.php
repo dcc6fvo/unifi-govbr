@@ -48,7 +48,7 @@ class LogoutController extends AbstractController
                 session_destroy();   
 
                 $this->logger->info('Cliente desconectado com sucesso.');
-                    return $this->render('logout.html.twig');
+                    return $this->render('unifi/logout.html.twig');
 
             }else{
                 $this->logger->error('Não foi possível desautorizar o usuario na controladora unifi: ');
