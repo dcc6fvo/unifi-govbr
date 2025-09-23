@@ -1,0 +1,148 @@
+{%  extends 'base.html.twig' %}
+
+
+{%  block body %}
+<body>
+    <div class="hero">
+        <div class="wrap">
+        <div class="logo-top">
+            <img src="{{ asset('banner/uffs-logo-branca.png') }}" alt="Universidade Federal da Fronteira Sul" class="uffs-logo" onerror="this.style.display='none'">
+        </div>
+        <div class="panel">
+            <h4>Escolha a forma de Autenticação:</h4>
+
+            <div class="tabs pills">
+                <button class="tablink {{ active_tab == 'tab-visitantes' ? 'active' : '' }}" data-tab="tab-visitantes">Visitante</button>
+                <button class="tablink {{ active_tab == 'tab-voucher' ? 'active' : '' }}" data-tab="tab-voucher">Voucher</button>
+                <button class="tablink {{ active_tab == 'tab-govbr' ? 'active' : '' }}" data-tab="tab-govbr">
+                    <img src="https://www.gov.br/++theme++padrao_govbr/favicons/favicon-32x32.png" alt="Ícone gov.br" class="tab-icon">
+                    gov.br
+                </button>
+                <button class="tablink {{ active_tab == 'tab-idUFFS' ? 'active' : '' }}" data-tab="tab-idUFFS">idUFFS</button>
+            </div>
+                {% for flash_error in app.flashes('error') %}
+                    <div class="alert alert-danger">{{ flash_error }}</div>
+                {% endfor %}
+            <div id="tab-idUFFS" class="tabcontent {{ active_tab == 'tab-idUFFS' ? 'active' : '' }}">
+                <h4 class="text-justify">Forneça suas credenciais:</h4>
+                
+                <form method="post" action="{{ path('ldap_auth') }}">
+                    <input type="hidden" name="active_tab" value="tab-idUFFS" />
+                    <input type="text" name="username_idUFFS" placeholder="idUFFS" autocomplete="username" required class="inp" />
+                    <input type="password" name="password" placeholder="Senha" autocomplete="current-password" required class="inp" />
+                    <button type="submit" class="btn btnform">Entrar</button>
+                </form>
+                
+                <div class="forgot-password-link" style="text-align: center; margin-top: 15px;">
+                    <a href="https://id.uffs.edu.br/id/XUI/#passwordReset/" target="_blank" style="color: #666; text-decoration: none; font-size: 14px;">Esqueceu a senha?</a>
+                </div>
+                
+                <div class="tabs-content-footer">
+                    <p class="message info">
+                        <strong>ℹ️ Informação:</strong>
+                        O idUFFS é para estudantes, servidores e terceirizados com cadastro no sistema de gestão de identidades da UFFS.
+                    </p>
+                </div>
+            </div>
+
+            <div id="tab-visitantes" class="tabcontent {{ active_tab == 'tab-visitantes' ? 'active' : '' }}">
+                <h4 class="text-justify">Forneça suas credenciais:</h4>
+                <form method="post" action="{{ path('ldap_auth') }}">
+                    <input type="hidden" name="active_tab" value="tab-visitantes" />
+                    <input type="text" name="username_visitante" placeholder="e-mail cadastrado" autocomplete="username" required class="inp" />
+                    <input type="password" name="password" placeholder="Senha" autocomplete="current-password" required class="inp" />
+                    <button type="submit" class="btn btnform">Entrar</button>
+                </form>
+                
+                <div class="forgot-password-link" style="text-align: center; margin-top: 15px;">
+                    <a href="https://cav.uffs.edu.br/forgot-password" target="_blank" style="color: #666; text-decoration: none; font-size: 14px;">Esqueceu a senha?</a>
+                </div>
+                
+                <div class="tabs-content-footer">
+                    <div id="signup" class="signup-wrapper">
+                        <p class="signup-title">Ainda não é cadastrado?</p>
+                        <a href="https://cav.uffs.edu.br/?backToCaptive=true" class="btn">Criar cadastro</a>
+                        <p class="message warn">
+                            <strong>⚠️ Atenção:</strong>
+                            Visitantes precisarão ter seu cadastro aprovado antes de ter acesso à rede da UFFS. Para isso, deverão
+                            buscar um servidor da Universidade.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-voucher" class="tabcontent {{ active_tab == 'tab-voucher' ? 'active' : '' }}">
+                <h4 class="text-justify">Digite seu voucher:</h4>
+
+                <form method="post" action="{{ path('ldap_auth') }}">
+                    <input type="hidden" name="active_tab" value="tab-voucher" />
+                    <input type="text" name="voucher" placeholder="Código do voucher" autocomplete="off" required class="inp" />
+                    <button type="submit" class="btn btnform">Entrar</button>
+                </form>
+                
+                <div class="tabs-content-footer">
+                    <p class="message warn">
+                        <strong>⚠️ Atenção:</strong>
+                        Vouchers são para eventos e devem ser criados pelo responsável no <a href="https://cav.uffs.edu.br/login" target="_blank" style="color: #666; text-decoration: underline;">CAV</a>.
+                        <br><a href="https://servicos.uffs.edu.br/tutoriais/uffs-semfio-criar-voucher-para-acesso-de-visitante-em-eventos" target="_blank" style="color: #666; text-decoration: underline;">Mais informações</a>
+                    </p>
+                </div>
+            </div>
+
+            <div id="tab-govbr" class="tabcontent {{ active_tab == 'tab-govbr' ? 'active' : '' }}">
+               <img src="https://www.gov.br/++theme++padrao_govbr/img/govbr-colorido-b.png" alt="Logo gov.br" class="govbr-logo">
+               <br>Faça login com suas credenciais do gov.br.
+                <a class="btn" href="{{ path('login') }}">Entrar com gov.br</a>
+                
+                <div class="tabs-content-footer">
+                    <p class="message info">
+                        <strong>ℹ️ Informação:</strong>
+                        Este serviço utiliza a plataforma de autenticação digital do governo federal.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            var links = document.querySelectorAll('.tablink');
+            links.forEach(function(btn){
+                btn.addEventListener('click', function(){
+                    var tab = this.getAttribute('data-tab');
+                    
+                    // Remover classes ativas
+                    document.querySelectorAll('.tablink').forEach(function(b){ b.classList.remove('active'); });
+                    document.querySelectorAll('.tabcontent').forEach(function(c){ 
+                        c.style.display = 'none'; 
+                        c.classList.remove('active');
+                    });
+                    
+                    // Limpar todos os campos de input antes de mostrar a nova aba
+                    document.querySelectorAll('input[type="text"], input[type="password"]').forEach(function(input){
+                        input.value = '';
+                    });
+                    
+                    // Remover mensagens de erro
+                    document.querySelectorAll('.alert-danger').forEach(function(alert){
+                        alert.remove();
+                    });
+                    
+                    // Ativar nova aba
+                    this.classList.add('active');
+                    var el = document.getElementById(tab);
+                    if (el) {
+                        el.style.display = 'block';
+                        el.classList.add('active');
+                    }
+                });
+            });
+        })();
+    </script>
+
+
+    
+</body>
+{%  endblock %}

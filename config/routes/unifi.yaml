@@ -17,3 +17,15 @@ logout:
 return_callback:
     path: '%app.govbr.redirect_path%'
     controller: App\Controller\ReturnCallbackController::index
+
+ldap_form:
+    path: '/ldap/login'
+    controller: App\Controller\LdapLoginController::form
+
+ldap_auth:
+    path: '/ldap/auth'
+    controller: App\Controller\LdapLoginController::authenticate
+
+dev_mock:
+    path: '/_dev/mock'
+    controller: App\Controller\DevMockController::mock

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<body>
+    <div class="hero">
+        <div class="wrap">
+            <div class="logo-top">
+                <img src="{{ asset('banner/uffs-logo-branca.png') }}" alt="Universidade Federal da Fronteira Sul" class="uffs-logo" onerror="this.style.display='none'">
+            </div>
+            <div class="panel">
+                <img src="{{ asset('banner/govbr-colorido-b.png') }}" alt="gov.br" class="govbr-logo-tab" onerror="this.src='https://www.gov.br/++theme++padrao_govbr/img/govbr-colorido-b.png'">
+                <h3>Redirecionando para gov.br...</h3>
+                <p>Você será redirecionado para a página de autenticação do gov.br em alguns segundos.</p>
+                <div class="loading">
+                    <div class="spinner"></div>
+                </div>
+                <p><small>Se não for redirecionado automaticamente, <a href="{{ govbr_url }}">clique aqui</a>.</small></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Redireciona automaticamente após 2 segundos
+        setTimeout(function() {
+            window.location.href = '{{ govbr_url }}';
+        }, 2000);
+    </script>
+
+</body>
+{% endblock %}

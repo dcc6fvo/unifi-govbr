@@ -31,6 +31,17 @@ parameters:
     app.govbr.client_id: '%env(GOVBR_CLIENT_ID)%'
     app.govbr.secret: '%env(GOVBR_SECRET)%'
 
+    # LDAP
+    app.ldap.host: '%env(default::LDAP_HOST)%'
+    app.ldap.port: '%env(default::LDAP_PORT)%'
+    app.ldap.encryption: '%env(default::LDAP_ENCRYPTION)%' # none|ssl|tls
+    app.ldap.base_dn: '%env(default::LDAP_BASE_DN)%'
+    app.ldap.bind_dn_template: '%env(default::LDAP_BIND_DN_TEMPLATE)%' # ex: uid={username},{base_dn} ou {username}@example.com
+
+    # Firewall Syslog
+    app.firewall.palo_addr: '%env(default::FIREWALL_PALO_ADDR)%'
+    app.firewall.palo_port: '%env(default::FIREWALL_PALO_PORT)%'
+
 services:
     # default configuration for services in *this* file
     _defaults:
@@ -50,6 +61,14 @@ services:
         resource: '../src/Controller/'
         tags: ['controller.service_arguments']
         public: true
+
+    App\Controller\LdapLoginController:
+        arguments:
+            $authLogger: '@monolog.logger.auth'
+
+    App\Service\LdapAuthService:
+        arguments:
+            $authLogger: '@monolog.logger.auth'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones

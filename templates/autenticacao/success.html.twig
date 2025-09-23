@@ -1,0 +1,19 @@
+{%  extends 'base.html.twig' %}
+
+
+{%  block body %}
+<body>
+    <div class="hero">
+        <div class="wrap">
+            <div class="logo-top">
+                <img src="{{ asset('banner/uffs-logo-branca.png') }}" alt="Universidade Federal da Fronteira Sul" class="uffs-logo" onerror="this.style.display='none'">
+            </div>
+            <div class="panel">
+                <h2>Autenticação bem‑sucedida!</h2>
+                <p>Você foi autenticado com sucesso e já pode navegar na Internet.</p>
+                <button class="btn" onclick="window.location.href='{{ url_provider }}/logout?post_logout_redirect_uri={{ url_logout }}'">Fazer Logout</button>
+            </div>
+        </div>
+    </div>
+</body>
+{%  endblock %}

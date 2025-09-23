@@ -3,129 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %}Autenticação Wi-Fi - gov.br{% endblock %}</title>
-        <style>
-            body {
-                font-family: 'Roboto', Arial, sans-serif;
-                background-color: #f5f5f5;
-                margin: 0;
-                padding: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                color: #333;
-            }
-            
-            .container {
-                background-color: white;
-                border-radius: 8px;
-                box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-                padding: 40px;
-                width: 90%;
-                max-width: 500px;
-                text-align: center;
-            }
-            
-            .govbr-logo {
-                width: 180px;
-                margin-bottom: 30px;
-            }
-            
-            h1 {
-                font-size: 24px;
-                margin-bottom: 20px;
-                color: #d93025; /* tom de alerta/vermelho */
-            }
-
-            h2 {
-                font-size: 24px;
-                margin-bottom: 20px;
-                color: #28a745; /* verde para sucesso */
-            }
-
-            h3 {
-                font-size: 24px;
-                margin-bottom: 20px;
-                color: #1351b4;
-            }
-            
-            p {
-                font-size: 16px;
-                margin-bottom: 30px;
-                line-height: 1.5;
-            }
-            
-            .retry-btn {
-                background-color: #d93025;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                padding: 14px 28px;
-                font-size: 16px;
-                font-weight: bold;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-            
-            .retry-btn:hover {
-                background-color: #a6201f;
-            }
-
-            .footer {
-                margin-top: 30px;
-                font-size: 12px;
-                color: #666;
-            }
-
-            .login-btn {
-                background-color: #1351b4;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                padding: 14px 28px;
-                font-size: 16px;
-                font-weight: bold;
-                cursor: pointer;
-                transition: background-color 0.3s;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .login-btn:hover {
-                background-color: #0d3a7a;
-            }
-            
-            .login-btn img {
-                margin-right: 10px;
-                width: 20px;
-            }
-
-            .logout-btn {
-                background-color: #d91818ff;
-                color: white;
-                border: none;
-                border-radius: 4px;
-                padding: 14px 28px;
-                font-size: 16px;
-                font-weight: bold;
-                cursor: pointer;
-                transition: background-color 0.3s;
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            .logout-btn:hover {
-                background-color: #580c0cff;
-            }
-            
-            .logout-btn img {
-                margin-right: 10px;
-                width: 20px;
-            }
-        </style>
+        <title>{% block title %}Autenticação Wi-Fi - UFFS {% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/estilo.css') }}">
 
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -138,5 +17,17 @@
     </head>
     <body>
         {% block body %}{% endblock %}
+        
+        <footer class="footer">
+            <p>
+                <a href="https://ati.uffs.edu.br/customer.pl">Suporte técnico</a><br>
+                Conectado ao portal externo - Versão 2025
+                <br>
+                <br>
+                Diretoria de Infraestrutura de Informações - DITI
+                <br>
+                Secretaria Especial de Tecnologia e Informação - SETI
+            </p>
+        </footer>
     </body>
 </html>

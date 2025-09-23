@@ -9,8 +9,10 @@ RUN apk add --no-cache --virtual .build-deps \
         oniguruma-dev \
         libzip-dev \
         curl-dev \
+        openldap-dev \
         git \
-    && docker-php-ext-install intl mbstring opcache xml zip curl \
+    && docker-php-ext-configure ldap \
+    && docker-php-ext-install intl mbstring opcache xml zip curl ldap \
     && apk del .build-deps
 
 # Instala Composer
@@ -33,7 +35,7 @@ RUN php bin/console cache:clear --env=prod --no-debug \
 FROM php:8.4.8-fpm-alpine
 
 # Instala apenas as bibliotecas de runtime necessárias
-RUN apk add --no-cache icu libxml2 oniguruma libzip curl
+RUN apk add --no-cache icu libxml2 oniguruma libzip curl openldap
 
 # Copia os binários PHP (extensões já compiladas, etc) da etapa build
 COPY --from=build /usr/local/ /usr/local/

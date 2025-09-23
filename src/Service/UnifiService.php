@@ -60,6 +60,11 @@ class UnifiService
         return $this->unifi->set_sta_note($user_id,$note);
     }
 
+    public function setStationName(string $user_id, string $name): bool {
+
+        return $this->unifi->set_sta_name($user_id, $name);
+    }
+
     public function getClients(): array{
 
         return $this->unifi->list_clients() ?? [];

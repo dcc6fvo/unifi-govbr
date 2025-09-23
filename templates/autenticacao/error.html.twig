@@ -1,0 +1,18 @@
+{%  extends 'base.html.twig' %}
+
+
+{%  block body %}
+<body>
+    <div class="hero">
+        <div class="wrap">
+            <div class="logo-top">
+                <img src="{{ asset('banner/uffs-logo-branca.png') }}" alt="Universidade Federal da Fronteira Sul" class="uffs-logo" onerror="this.style.display='none'">
+            </div>
+            <div class="panel">
+                <h1>Erro na autenticação</h1>
+                <p>{{ mensagem }}</p>
+            </div>
+        </div>
+    </div>
+</body>
+{%  endblock %}

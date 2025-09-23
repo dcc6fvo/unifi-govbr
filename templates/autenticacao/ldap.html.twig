@@ -1,0 +1,39 @@
+{%  extends 'base.html.twig' %}
+
+
+{%  block body %}
+<body>
+    <div class="hero">
+        <div class="wrap">
+            <div class="logo-top">
+                <img src="{{ asset('banner/uffs-logo-branca.png') }}" alt="Universidade Federal da Fronteira Sul" class="uffs-logo" onerror="this.style.display='none'">
+            </div>
+            <div class="panel">
+                <h3>Autenticação via LDAP</h3>
+
+                {% if error is defined %}
+                    <div class="alert alert-danger">{{ error }}</div>
+                {% endif %}
+
+                <form method="post" action="{{ path('ldap_auth') }}">
+                    <div class="form-group">
+                        <label for="username">Usuário</label>
+                        <input type="text" id="username" name="username" required class="inp" />
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" required class="inp" />
+                    </div>
+                    <button type="submit" class="btn">Entrar</button>
+                </form>
+
+                <div class="back-link">
+                    <a href="{{ path('index') }}">Voltar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+{%  endblock %}
+
+

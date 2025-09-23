@@ -1,6 +1,7 @@
 monolog:
     channels:
         - deprecation # Deprecations are logged in the dedicated "deprecation" channel when it exists
+        - auth
 
 when@dev:
     monolog:
@@ -10,6 +11,11 @@ when@dev:
                 path: "%kernel.logs_dir%/%kernel.environment%.log"
                 level: debug
                 channels: ["!event"]
+            auth:
+                type: stream
+                path: "%kernel.logs_dir%/auth.log"
+                level: info
+                channels: ["auth"]
             # uncomment to get logging in your browser
             # you may have to allow bigger header sizes in your Web server configuration
             #firephp:
@@ -36,6 +42,11 @@ when@test:
                 type: stream
                 path: "%kernel.logs_dir%/%kernel.environment%.log"
                 level: debug
+            auth:
+                type: stream
+                path: "%kernel.logs_dir%/auth.log"
+                level: info
+                channels: ["auth"]
 
 when@prod:
     monolog:
@@ -50,6 +61,12 @@ when@prod:
                 type: stream
                 path: php://stderr
                 level: debug
+                formatter: monolog.formatter.json
+            auth:
+                type: stream
+                path: php://stderr
+                level: info
+                channels: ["auth"]
                 formatter: monolog.formatter.json
             console:
                 type: console
